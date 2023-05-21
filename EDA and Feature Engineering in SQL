@@ -1,0 +1,39 @@
+-- Total amount of trips
+SELECT COUNT(ride_id) AS number_of_trips FROM `starry-argon-387110.Divvy_Data.202304_trips`;
+
+
+-- Unique rideable types
+SELECT DISTINCT(rideable_type) AS unique_rideable_types FROM `starry-argon-387110.Divvy_Data.202304_trips`;
+
+-- Amount of trips by day of week
+SELECT COUNT(ride_id) AS number_of_trips_weekday 
+FROM `starry-argon-387110.Divvy_Data.202304_trips`
+GROUP BY day_of_week_word; 
+
+-- Amount of trips by membership type
+SELECT COUNT(ride_id) AS number_of_trips 
+FROM `starry-argon-387110.Divvy_Data.202304_trips`
+GROUP BY day_of_week_word; 
+
+-- Amount of trips by weekday and weekend
+SELECT COUNT(*) AS trips_by_daytype
+FROM `starry-argon-387110.Divvy_Data.202304_trips_day`
+GROUP BY day_type;
+
+--Average trip_length by day of week
+SELECT AVG(ride_length) AS avg_ride_length 
+FROM `starry-argon-387110.Divvy_Data.202304_trips`
+GROUP BY day_of_week_word;
+
+--Average trip_length by membership type
+SELECT AVG(ride_length) AS avg_ride_length 
+FROM `starry-argon-387110.Divvy_Data.202304_trips`
+GROUP BY member_casual;
+
+--The most popular routes
+SELECT CONCAT(start_station_name, "-", end_station_name) as route_name, 
+       COUNT(CONCAT(start_station_name, "-", end_station_name)) as  
+       number_of_trips
+FROM `starry-argon-387110.Divvy_Data.202304_trips`
+GROUP BY route_name 
+ORDER BY number_of_trips DESC; 
